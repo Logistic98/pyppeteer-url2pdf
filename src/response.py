@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from code import ResponseMessage, ResponseCode
+from responseCode import ResponseMessage, ResponseCode
 
 
 class ResMsg(object):

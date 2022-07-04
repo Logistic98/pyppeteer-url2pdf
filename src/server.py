@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import json
+import time
 from uuid import uuid1
 from flask import Blueprint, Flask, jsonify, request
 from flask_cors import CORS
@@ -9,7 +10,7 @@ import os
 import asyncio
 
 from log import logger
-from code import ResponseCode, ResponseMessage
+from responseCode import ResponseCode, ResponseMessage
 from utils import url_save_pdf, download_file
 
 # 创建一个服务
@@ -116,7 +117,9 @@ def urlToPdf():
         clip = {"width": 1920, "height": 1680}
 
     # 创建pdf的存储目录
-    pdf_base_path = './tmp'
+    now_str = time.strftime("%Y%m%d", time.localtime())
+    pdf_root_path = './tmp/'
+    pdf_base_path = pdf_root_path + now_str
     if not os.path.exists(pdf_base_path):
         os.makedirs(pdf_base_path)
     pdf_path = pdf_base_path + '/' + pdf_name
@@ -126,6 +129,7 @@ def urlToPdf():
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(url_save_pdf(url, pdf_path, resolution, clip))
+        logger.info("成功将【{}】网址保存成pdf文件【{}】！".format(url, pdf_path))
     except Exception as e:
         logger.error(e)
         fail_response = dict(code=ResponseCode.BUSINESS_FAIL, msg=ResponseMessage.BUSINESS_FAIL, data=None)
