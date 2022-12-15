@@ -8,7 +8,7 @@
 
 局限性：依赖于网络环境，目标网址过慢的话会出现未加载完即截屏的情况。
 
-本项目的说明详见我的博客：[使用pyppeteer将网页保存成pdf文件](https://www.eula.club/使用pyppeteer将网页保存成pdf文件.html)
+本项目的说明详见我的博客：[使用Flask封装集成深度学习算法](https://www.eula.club/blogs/使用Flask封装集成深度学习算法.html)
 
 ### 2. 项目部署
 
